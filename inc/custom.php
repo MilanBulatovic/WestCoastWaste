@@ -4,6 +4,7 @@ function custom_excerpt_length( $length ) {
 }
 add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 
+//Removing "Category" title 
 function prefix_category_title( $title ) {
     if ( is_category() ) {
         $title = single_cat_title( '', false );
@@ -13,7 +14,7 @@ function prefix_category_title( $title ) {
 add_filter( 'get_the_archive_title', 'prefix_category_title' );
 
 
-/*Product description included*/
+//Product description included
 function excerpt_in_cart($cart_item_html, $product_data) {
 global $_product;
 
@@ -26,7 +27,7 @@ echo $cart_item_html . '<br><p class="shortDescription">' . $excerpt . '...' . '
 add_filter('woocommerce_cart_item_name', 'excerpt_in_cart', 40, 2);
 
 
-// To change add to cart text on single product page
+// To change "Add to cart" text on single product page in "Order this skip bin"
 add_filter( 'woocommerce_product_single_add_to_cart_text', 'woocommerce_custom_single_add_to_cart_text' ); 
 function woocommerce_custom_single_add_to_cart_text() {
     return __( 'Order this skip bin', 'woocommerce' ); 
@@ -39,9 +40,8 @@ function bbloomer_ins_woocommerce_product_excerpt() {
      the_excerpt();
 }
 
- /**
- Remove all possible fields
- **/
+ 
+ //Remove all possible fields
 function wc_remove_checkout_fields( $fields ) {
 
     // Billing fields
@@ -103,21 +103,21 @@ add_filter( 'woocommerce_order_item_name', 'ts_product_image_on_thankyou', 10, 3
   
 function ts_product_image_on_thankyou( $name, $item, $visible ) {
  
-    /* Return if not thankyou/order-received page */
+    //Return if not thankyou/order-received page
     if ( ! is_order_received_page() ) {
         return $name;
     }
      
-    /* Get product id */
+    // Get product id
     $product_id = $item->get_product_id();
       
-    /* Get product object */
+    // Get product object
     $_product = wc_get_product( $product_id );
   
-    /* Get product thumbnail */
+    // Get product thumbnail
     $thumbnail = $_product->get_image();
   
-    /* Add wrapper to image and add some css */
+    // Add wrapper to image and add some css
     $image = '<div class="ts-product-image" style="width: 52px; height: 45px; display: inline-block; padding-right: 7px; vertical-align: middle;">'
                 . $thumbnail .
             '</div>'; 
@@ -138,23 +138,23 @@ add_filter( 'woocommerce_cart_item_name', 'ts_product_image_on_checkout', 10, 3 
  
 function ts_product_image_on_checkout( $name, $cart_item, $cart_item_key ) {
      
-    /* Return if not checkout page */
+    // Return if not checkout page
     if ( ! is_checkout() ) {
         return $name;
     }
      
-    /* Get product object */
+    // Get product object
     $_product = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
  
-    /* Get product thumbnail */
+    // Get product thumbnail
     $thumbnail = $_product->get_image();
  
-    /* Add wrapper to image and add some css */
+    // Add wrapper to image and add some css
     $image = '<div class="ts-product-image" style="width: 52px; height: 45px; display: inline-block; padding-right: 7px; vertical-align: middle;">'
                 . $thumbnail .
             '</div>'; 
  
-    /* Prepend image to name and return it */
+    // Prepend image to name and return it
     return $image . $name;
 }
 
@@ -162,5 +162,6 @@ add_filter('carousel_slider_load_scripts', function () {
     return true;
 }, 9999);
 
-//adding Category Thumbnail Support
+
+//Adding Category Thumbnail Support
 add_theme_support('category-thumbnails');
