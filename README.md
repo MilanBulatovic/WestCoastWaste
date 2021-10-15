@@ -1,7 +1,8 @@
 # WestCoastWaste-Wordpress-Theme
-West Coast Waste website design used for practice
+West Coast Waste website - personal project
 
-Custom wordpress theme development with woocommerce shop. No page builders, fully dynamic and responsive.
+Custom wordpress theme development with woocommerce shop. No page builders, fully dynamic and responsive. 
+ACF, CPT, Customizer...
 
 Link for preview - http://display.great-site.net/
 
